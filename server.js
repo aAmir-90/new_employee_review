@@ -9,7 +9,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const path = require('path');
 
-const PORT = process.env.ERS_PORT;
+const PORT = process.env.ERS_PORT || 3000;
 const app = express();
 
 app.use(express.json()); // convert json into javascript object
@@ -19,7 +19,7 @@ app.use(cookieParser());
 // session setup
 app.use(session({
     name: 'ERS',
-    secret: process.env.ERS_SESSION_SECRETE,
+    secret: process.env.ERS_SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
     cookie: {
@@ -38,7 +38,7 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
 
-app.use(express.static(path.join(__dirname, 'public'))); // public | static file 
+app.use(express.static(path.join(__dirname, 'Practical'))); // practical | static file 
 
 // ejs setup
 app.use(expressLayouts);
